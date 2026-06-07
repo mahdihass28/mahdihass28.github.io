@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design 1 – Services Website | Mahdi Hassoun</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Mahdi H.</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navMenu"
+        aria-controls="navMenu"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#how-i-work">How I Work</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#case-studies">Projects</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section id="hero">
+    <div class="container text-center">
+      <h1>Design 1: Services Website</h1>
+      <p class="lead mt-3">A professional website for a local service business</p>
+    </div>
+  </section>
+
+  <section style="padding: 70px 0;">
+    <div class="container" style="max-width: 760px;">
+
+      <div class="text-center mb-5">
+        <a href="barbershop/index.html" target="_blank">
+          <img
+            src="https://placehold.co/700x350/111111/c8a45a?text=Prestige+Cuts+Barbershop"
+            alt="Prestige Cuts barbershop site preview"
+            class="img-fluid rounded"
+            style="border: 2px solid #dee2e6;"
+          />
+        </a>
+        <div class="mt-3">
+          <a href="barbershop/index.html" target="_blank" class="btn btn-primary me-2">Launch Site &rarr;</a>
+          <a href="index.html#case-studies" class="btn btn-outline-secondary">&larr; Back to Projects</a>
+        </div>
+      </div>
+
+      <h2 class="section-title">Project Overview</h2>
+      <p class="mt-3">
+        <strong>Prestige Cuts</strong> is a barbershop services website built for a local Ottawa business.
+        The site helps clients discover services, meet the team, and book an appointment online.
+      </p>
+
+      <h4 class="mt-4">Features</h4>
+      <ul>
+        <li>Hero section with direct booking call-to-action</li>
+        <li>Services grid: Classic Cut, Skin Fade, Beard Trim, Combo, Kids Cut with pricing</li>
+        <li>4-step interactive booking form (service, date/time, contact info, confirmation)</li>
+        <li>Team section with 3 barber profiles</li>
+        <li>Contact section with address, hours, and phone</li>
+      </ul>
+
+      <h4 class="mt-4">Design Decisions</h4>
+      <p>
+        Dark background (#111) with gold accents (#c8a45a) establishes a premium feel.
+        Oswald headings pair with Inter body text for contrast between display and reading sizes.
+        The booking flow breaks a multi-field form into 4 labeled steps to reduce cognitive load.
+      </p>
+
+      <div class="alert alert-success mt-5" role="alert">
+        <strong>Status:</strong> Complete. Built with React + Vite.
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container text-center">
+      <p class="mb-0">&copy; 2026 Mahdi Hassoun | SEG3525 Portfolio</p>
+    </div>
+  </footer>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+  ></script>
+</body>
+</html>
