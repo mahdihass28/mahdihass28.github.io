@@ -1,0 +1,66 @@
+export const t = {
+  fr: {
+    nav: { back: '← Mahdi H.', title: 'MémoFlip' },
+    setup: {
+      subtitle: 'Testez votre mémoire – trouvez toutes les paires !',
+      themeLabel: 'Thème des cartes',
+      levelLabel: 'Niveau de difficulté',
+      play: 'Jouer →',
+      bestMoves: (n) => `⭐ ${n} coups`,
+      themes: { espace: '🚀 Espace', animaux: '🐶 Animaux', fruits: '🍎 Fruits' },
+      levels: {
+        facile:    { label: 'Facile',    desc: '4×3 · 6 paires' },
+        moyen:     { label: 'Moyen',     desc: '4×4 · 8 paires' },
+        difficile: { label: 'Difficile', desc: '5×4 · 10 paires' },
+      },
+    },
+    game: {
+      timeLabel:  '⏱ Temps',
+      pairsLabel: '🃏 Paires',
+      movesLabel: '🔄 Coups',
+      cardHidden:   'Carte face cachée',
+      cardRevealed: (sym) => `Carte retournée : ${sym}`,
+    },
+    end: {
+      title:    'Félicitations !',
+      subtitle: 'Vous avez trouvé toutes les paires !',
+      timeLabel:  'Temps',
+      movesLabel: 'Coups',
+      newBest: '⭐ Nouveau meilleur score !',
+      menu:   'Menu',
+      replay: 'Rejouer →',
+    },
+  },
+  en: {
+    nav: { back: '← Mahdi H.', title: 'MémoFlip' },
+    setup: {
+      subtitle: 'Test your memory – find all the pairs!',
+      themeLabel: 'Card Theme',
+      levelLabel: 'Difficulty Level',
+      play: 'Play →',
+      bestMoves: (n) => `⭐ ${n} moves`,
+      themes: { espace: '🚀 Space', animaux: '🐶 Animals', fruits: '🍎 Fruits' },
+      levels: {
+        facile:    { label: 'Easy',   desc: '4×3 · 6 pairs' },
+        moyen:     { label: 'Medium', desc: '4×4 · 8 pairs' },
+        difficile: { label: 'Hard',   desc: '5×4 · 10 pairs' },
+      },
+    },
+    game: {
+      timeLabel:  '⏱ Time',
+      pairsLabel: '🃏 Pairs',
+      movesLabel: '🔄 Moves',
+      cardHidden:   'Card face down',
+      cardRevealed: (sym) => `Card revealed: ${sym}`,
+    },
+    end: {
+      title:    'Congratulations!',
+      subtitle: 'You found all the pairs!',
+      timeLabel:  'Time',
+      movesLabel: 'Moves',
+      newBest: '⭐ New best score!',
+      menu:   'Menu',
+      replay: 'Play Again →',
+    },
+  },
+}

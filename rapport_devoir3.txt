@@ -1,0 +1,290 @@
+================================================================================
+SEG3125 – Analyse et conception d'interfaces usager
+DEVOIR 3 – Rapport de conception
+================================================================================
+
+1. DESIGNER
+-----------
+Nom            : Mahdi Hassoun
+Numéro étudiant: 300405577
+Cours          : SEG3125 – Analyse et conception d'interfaces usager
+Session        : Été 2026
+
+
+================================================================================
+2. JEU
+================================================================================
+
+2a. Nom et type de jeu
+-----------------------
+Nom : MémoFlip
+
+Type : Jeu de mémoire de type « retournement de cartes » (card-matching game).
+Le joueur retourne des cartes deux par deux, cherche les paires identiques et
+doit trouver toutes les paires avant que le chronomètre ne s'arrête. Le score
+est mesuré en nombre de coups et en temps écoulé.
+
+Mécaniques principales :
+  - Grille de cartes face cachée
+  - Retournement par clic, deux cartes à la fois
+  - Paires trouvées restent retournées (bordure verte)
+  - Cartes non-assorties se retournent automatiquement après 0,9 s
+  - HUD affichant en temps réel : chronomètre, paires trouvées, nombre de coups
+  - Écran de fin avec résultats et sauvegarde du meilleur score (localStorage)
+
+Niveaux de difficulté (configuration requise) :
+  - Facile    : grille 4×3,  6 paires (12 cartes)
+  - Moyen     : grille 4×4,  8 paires (16 cartes)
+  - Difficile : grille 5×4, 10 paires (20 cartes)
+
+Thèmes configurables :
+  - Espace  : 🚀 🌍 🌙 ⭐ 🪐 ☄️ 🌌 🛸 🔭 🌠
+  - Animaux : 🐶 🐱 🐸 🦊 🐼 🦁 🐨 🐧 🦋 🦄
+  - Fruits  : 🍎 🍊 🍋 🍇 🍓 🍑 🍒 🍍 🥭 🍈
+
+
+2b. Sites d'inspiration
+------------------------
+
+Source 1 : https://www.helpfulgames.com/subjects/braintraining/memory.html
+  Inspiration : Ce site a inspiré la mécanique de base du jeu (grille de cartes
+  retournables). Cependant, son interface visuelle est très datée (couleurs
+  criardes, mise en page sans hiérarchie). Cela m'a motivé à créer une version
+  avec un design moderne, sombre et cohérent, avec une animation de retournement
+  3D fluide et un système de HUD clair.
+
+Source 2 : https://www.memozor.com/memory-games
+  Inspiration : Ce site propose plusieurs niveaux de difficulté et la possibilité
+  de choisir des thèmes d'images. J'ai repris le principe de configurabilité
+  (thème + niveau avant de commencer) et l'idée de sauvegarder le meilleur score
+  par niveau. J'ai ensuite adapté cette logique à l'approche centrée utilisateur
+  du cours, avec des personas précis et des storyboards distincts.
+
+
+================================================================================
+3. STORYBOARDS ET MAQUETTES
+================================================================================
+
+3a. Définition des deux personas
+----------------------------------
+
+--- PERSONA 1 : Léa Tremblay ---
+
+Nom : Léa Tremblay
+
+Caractéristiques intrinsèques :
+  1. Étudiante en première année au cégep (17 ans)
+  2. Joue régulièrement à des jeux mobiles dans ses temps libres
+  3. Facilement distraite si l'interface n'est pas visuellement attrayante
+
+Relation à la technologie : Très à l'aise avec les appareils numériques
+  (smartphone, tablette, ordinateur). Utilise quotidiennement les réseaux sociaux
+  et des applications de jeux. Elle préfère les interfaces visuellement stimulantes
+  avec des animations et des couleurs vives.
+
+Relation au domaine (jeux de mémoire) : Joue occasionnellement à des jeux
+  similaires sur son téléphone. Elle connaît le principe des paires à trouver
+  mais n'a jamais pratiqué de jeu de mémoire sérieusement. Elle est attirée par
+  les défis et le sentiment d'accomplissement.
+
+Objectif : Améliorer sa mémoire visuelle de façon ludique tout en se
+  divertissant entre les cours. Elle souhaite atteindre un meilleur score à
+  chaque session de jeu.
+
+--- PERSONA 2 : Robert Côté ---
+
+Nom : Robert Côté
+
+Caractéristiques intrinsèques :
+  1. Retraité de 68 ans, anciennement comptable
+  2. Cherche à maintenir ses capacités cognitives après la retraite
+  3. Patient et méthodique ; préfère la clarté à l'esthétique complexe
+
+Relation à la technologie : Niveau intermédiaire. Utilise un ordinateur
+  de bureau et une tablette pour naviguer sur Internet et communiquer par
+  courriel. Il peut se sentir intimidé par des interfaces trop chargées ou des
+  animations trop rapides. Il a besoin que les éléments cliquables soient bien
+  identifiés.
+
+Relation au domaine (jeux de mémoire) : A entendu parler des bénéfices des
+  jeux cognitifs pour le vieillissement. C'est sa première utilisation d'un jeu
+  de mémoire en ligne. Il a besoin d'instructions claires et d'un retour visuel
+  évident à chaque action.
+
+Objectif : Exercer sa mémoire à court terme de façon régulière et progressive,
+  en commençant par le niveau Facile, puis en augmentant la difficulté au fil
+  des semaines.
+
+
+3b. Storyboards (deux maquettes visuellement différentes)
+-----------------------------------------------------------
+
+Les maquettes ont été créées dans Figma. Les deux storyboards présentent le
+même jeu (MémoFlip) mais avec des choix visuels et interactifs différents,
+inspirés chacun par un persona.
+
+--- STORYBOARD 1 – Persona : Léa Tremblay ---
+    Thème visuel : Sombre et dynamique (correspondant au portfolio)
+
+  Étape 1 – Écran de configuration (level & options) :
+    - Fond noir / bleu nuit (#0f0f23) avec grille de points subtile
+    - Icône 🧠 animée (flottante) en titre
+    - Sélecteur de thème : 3 boutons horizontaux avec émojis et étiquettes
+    - Sélecteur de niveau : 3 boutons en colonne, indiquant la grille et le
+      nombre de paires ; meilleur score affiché en jaune si disponible
+    - Bouton « Jouer → » bleu prominent en bas
+    - Interaction : Clic sur les boutons ; sélection mise en évidence par une
+      bordure bleue lumineuse (box-shadow)
+
+  Étape 2 – Écran de jeu avec retour :
+    - HUD en haut : Temps | Paires | Coups (panneau semi-transparent)
+    - Grille de cartes : fond bleu nuit, dos avec motif de points
+    - Au survol d'une carte : bordure bleue lumineuse
+    - Après clic : animation de retournement 3D (rotateY 180°), face bleue
+    - Paire trouvée : bordure verte + lueur verte (box-shadow vert)
+    - Paire non trouvée : cartes se retournent automatiquement après 0,9 s
+    - Interaction : Clic unique sur chaque carte
+
+  Étape 3 – Écran de fin de partie :
+    - Trophée 🏆 animé (apparition avec scale + rotation)
+    - « Félicitations ! » en grand
+    - Deux tuiles de statistiques : Temps | Coups
+    - Badge jaune « ⭐ Nouveau meilleur score ! » si record battu
+    - Deux boutons : « Menu » (secondaire) et « Rejouer → » (primaire bleu)
+
+--- STORYBOARD 2 – Persona : Robert Côté ---
+    Thème visuel : Clair, épuré, contraste élevé
+
+  Étape 1 – Écran de configuration :
+    - Fond blanc (#ffffff) avec bandeau de titre gris clair
+    - Logo textuel « MémoFlip » en gros titre, police sans-serif lisible
+    - Sélecteur de thème : 3 grandes tuiles avec image illustrative et
+      étiquette descriptive (« Thème Espace », « Thème Animaux », etc.)
+    - Sélecteur de niveau : 3 boutons larges avec indication claire du nombre
+      de cartes et de la taille de la grille, étiquettes de couleur distinctes
+      (vert = Facile, orange = Moyen, rouge = Difficile)
+    - Bouton « Commencer la partie » large et bien visible (fond vert foncé)
+    - Instructions courtes en bas de l'écran : « Retournez deux cartes à la
+      fois. Trouvez toutes les paires pour gagner. »
+    - Interaction : Sélection par grande zone cliquable ; état sélectionné
+      indiqué par un cadre vert et une coche
+
+  Étape 2 – Écran de jeu :
+    - Fond gris clair (#f8f9fa), cartes blanches avec ombre portée
+    - HUD en haut : fond blanc avec icônes claires et étiquettes textuelles
+      complètes (« Temps écoulé », « Paires trouvées », « Nombre de coups »)
+    - Cartes dos : fond bleu clair avec point d'interrogation « ? » bien visible
+    - Cartes face : fond blanc avec émoji très grand et centré
+    - Paire trouvée : cartes grisées avec coche verte superposée
+    - Animation simplifiée (opacité) pour respecter la préférence de l'utilisateur
+    - Interaction : Grande zone cliquable pour chaque carte, curseur pointer
+
+  Étape 3 – Écran de fin :
+    - Message de félicitation en grand texte lisible : « Partie terminée ! »
+    - Récapitulatif sous forme de tableau : Temps | Coups | Niveau
+    - Message encourageant : « Excellent travail ! Continuez à pratiquer. »
+    - Deux boutons larges : « Rejouer ce niveau » et « Changer de niveau »
+    - Option de retour au menu principal
+
+
+================================================================================
+4. PROTOTYPE HAUTE-FIDÉLITÉ
+================================================================================
+
+4a. Choix de design visuel
+---------------------------
+
+Le prototype final combine les deux storyboards en adoptant le thème sombre du
+Storyboard 1 (correspondant au portfolio de Mahdi Hassoun) tout en incorporant
+la clarté et la lisibilité du Storyboard 2.
+
+THÈME DE COULEURS (cohérence visuelle)
+  - Fond principal  : #0c0c1d (bleu nuit, identique au portfolio)
+  - Fond sections   : dégradé linéaire #0f0f23 → #1a1a2e → #16213e
+  - Accent primaire : #0d6efd (bleu Bootstrap, repris du portfolio)
+  - Carte (face)    : #0d1b35 avec bordure #0d6efd à 45 % d'opacité
+  - Carte (dos)     : #13132a avec motif de points radial (cohérence hero)
+  - Paire trouvée   : bordure #198754 (vert) avec lueur rgba(25,135,84,0.28)
+  - Texte principal : #ffffff
+  - Texte secondaire: #b8c4d4
+  - Accent record   : #fbbf24 (ambre)
+  Ce choix crée une cohérence forte avec le portfolio (Devoir 1) et le site
+  Prestige Cuts (Devoir 2), renforçant l'identité visuelle de l'ensemble.
+
+TYPOGRAPHIE
+  - Police : Inter (Google Fonts), identique au portfolio
+  - Titre principal (MémoFlip) : 2,2rem, weight 700, letter-spacing -0.02em
+  - Labels HUD : 0,7rem, weight 500, uppercase, letter-spacing 0,06em
+  - Valeurs HUD : 1,3rem, weight 700 (font-variant-numeric: tabular-nums)
+  - Étiquettes sections : 0,75rem, uppercase, bleu #74b9ff (hiérarchie claire)
+  - Bouton principal : 1rem, weight 700 (appel à l'action dominant)
+  La typographie crée une hiérarchie visuelle claire : titre → labels → contenus.
+
+MISE EN PAGE ET ESPACE NÉGATIF
+  - Tous les écrans sont centrés verticalement et horizontalement (flexbox)
+  - Carte principale (SetupScreen/EndScreen) : max-width 480px, padding 40px
+  - Espacement généreux entre sections (36px, 28px) pour éviter la densité
+  - Grille de cartes : gap de 12px (8px sur mobile), max-width 560px
+  - L'espace négatif sombre entre les cartes renforce la figure/fond (Gestalt)
+
+CONTRASTE, ÉCHELLE, BALANCE, HIÉRARCHIE VISUELLE
+  - Contraste élevé (WCAG AA) : texte blanc sur fond #0c0c1d (ratio > 7:1)
+  - Cartes en aspect-ratio 1:1, émoji scalé par clamp(1.4rem, 4.5vw, 2.4rem)
+  - Hiérarchie : nav (56px) → HUD (résumé compact) → grille (élément focal)
+  - Balance symétrique de la grille ; HUD équilibré en 3 colonnes égales
+  - Le bouton « Jouer » (full-width, fond bleu) domine l'écran de config
+
+APPLICATION DES PRINCIPES GESTALT
+  1. Similarité : Toutes les cartes dos ont le même visuel (fond #13132a,
+     motif identique) → le cerveau les groupe automatiquement en ensemble.
+  2. Proximité : Les cartes de la grille sont rapprochées (gap 12px) et forment
+     un bloc unifié distinct du HUD ; les boutons d'options sont groupés.
+  3. Figure et fond : Les cartes lumineuses (bordure bleue) ressortent
+     nettement sur le fond sombre, créant un fort contraste figure/fond.
+  4. Continuité : L'animation de retournement 3D (rotateY 180°, 0,45 s ease)
+     guide l'œil de façon fluide ; la transition des bordures (normal → hover →
+     flipped → matched) suit une progression logique.
+  5. Clôture (closure) : La grille rectangulaire de cartes, même incomplète,
+     est perçue comme un tout. Les cases vides (en début de partie, carte dos)
+     sont interprétées comme faisant partie du même ensemble.
+  6. Symétrie : Le HUD à 3 éléments équidistants et les boutons en paire
+     (Menu / Rejouer) créent un équilibre symétrique rassurant.
+
+PATTERNS D'ORGANISATION, D'ENTRÉE ET DE NAVIGATION
+  - Organisation : Progressive disclosure (setup → jeu → résultat) ; une seule
+    tâche par écran
+  - Input : Clic simple (pointeur), grandes zones cliquables (aspect-ratio 1),
+    indicateurs visuels clairs (hover, active)
+  - Navigation : Barre de navigation persistante avec lien retour portfolio ;
+    boutons d'action au bas de chaque écran (progression naturelle)
+
+4b. Lien vers le portfolio
+---------------------------
+Portfolio     : https://mahdihass28.github.io/
+Jeu MémoFlip  : https://mahdihass28.github.io/memory-game/
+Page projet   : https://mahdihass28.github.io/design2.html
+
+
+================================================================================
+5. CODE – LIEN GITHUB
+================================================================================
+
+Dépôt GitHub : https://github.com/mahdihass28/mahdihass28.github.io
+
+Structure des fichiers du jeu :
+  memory-game-src/         ← Code source React (Vite)
+    src/
+      App.jsx              ← Composant racine (gestion d'écrans)
+      App.css              ← Styles globaux du jeu
+      components/
+        SetupScreen.jsx    ← Écran de configuration (thème + niveau)
+        GameBoard.jsx      ← Logique de jeu + grille de cartes
+        CardTile.jsx       ← Composant carte individuelle
+        EndScreen.jsx      ← Écran de fin de partie + scores
+    vite.config.js
+    package.json
+  memory-game/             ← Build Vite (déployé sur GitHub Pages)
+
+================================================================================
+Fin du rapport
+================================================================================
