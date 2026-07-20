@@ -180,9 +180,7 @@ obligatoire ; les chaînes sont néanmoins centralisées dans un module i18n.js
 
 4b. Liens
 ---------
-Portfolio       : https://mahdihass28.github.io/
-Page du projet  : https://mahdihass28.github.io/design4.html
-Tableau de bord : https://mahdihass28.github.io/dashboard/
+Portfolio       : https://lustrous-kashata-8ff93b.netlify.app/
 
 Le portfolio a également été révisé (exigence 6) : toutes les images
 temporaires du Devoir 1 ont été remplacées par de vraies captures d'écran des
