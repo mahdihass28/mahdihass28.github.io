@@ -104,7 +104,7 @@ export default function App() {
       <footer className="foot">
         <p>{t.footerCourse}</p>
         <p className="foot-src">{t.footerSource}</p>
-        <a href="https://mahdihass28.github.io/design4.html">{t.backToPortfolio}</a>
+        <a href="../design4.html">{t.backToPortfolio}</a>
       </footer>
     </div>
   );
