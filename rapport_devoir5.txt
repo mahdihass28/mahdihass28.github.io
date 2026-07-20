@@ -1,0 +1,225 @@
+================================================================================
+SEG3525 – Conception et analyse d'interfaces usagers
+DEVOIR 5 – Rapport de conception : Tableau de bord interactif bilingue
+================================================================================
+
+1. CONCEPTEUR
+-------------
+Nom            : Mahdi Hassoun
+Numéro étudiant: 300405577
+Cours          : SEG3525 – Conception et analyse d'interfaces usagers
+Session        : Été 2026
+
+
+================================================================================
+2. TABLEAU DE BORD – OBJECTIF ET DONNÉES
+================================================================================
+
+2a. Domaine choisi et jeu de données
+------------------------------------
+Domaine : prix des denrées alimentaires au Canada (exemple A de l'énoncé).
+
+Le tableau de bord « Tableau de bord des prix alimentaires canadiens » permet
+d'explorer l'évolution mensuelle des prix de détail de huit produits (tomates,
+pommes de terre, bananes, poitrine de poulet, bœuf haché, lait 4 L, œufs à la
+douzaine, pain 675 g) de janvier 2021 à décembre 2025.
+
+IMPORTANT : le jeu de données est SYNTHÉTIQUE, généré par IA à l'aide d'un
+script déterministe (tendance d'inflation annuelle + saisonnalité hivernale +
+léger bruit aléatoire), modelé sur les tendances publiées par Statistique
+Canada :
+  https://www.statcan.gc.ca/fr/themes-debut/prix-aliments
+
+Comme l'exige l'énoncé, une bannière bien visible en haut du tableau de bord
+indique clairement, dans les deux langues, que les données sont synthétiques
+et ne constituent pas des mesures réelles.
+
+2b. Modifications apportées aux données
+---------------------------------------
+  - Sélection d'un sous-ensemble de 8 produits représentatifs (protéines,
+    produits frais, produits de base)
+  - Génération de 60 points mensuels par produit (2021–2025), en dollars
+    canadiens, arrondis au cent
+  - Taux d'inflation appliqué par année (dont la forte poussée de 2022,
+    ~9,8 %) pour refléter la réalité récente
+  - Saisonnalité hivernale plus marquée pour les produits frais (ex. tomates)
+
+2c. Tableaux de bord d'inspiration
+----------------------------------
+  - Visualisations des prix des aliments de Statistique Canada (lien
+    ci-dessus) : idée du tableau produit × mois et de la variation en
+    pourcentage sur 12 mois.
+
+
+================================================================================
+3. RÉFLEXION / CONCEPTION
+================================================================================
+
+3A. Graphiques
+--------------
+Graphique 1 – Graphique LINÉAIRE « Évolution du prix dans le temps » :
+  Le prix est une série temporelle continue ; la ligne est le type de
+  graphique recommandé (vidéos NN/g) pour montrer une tendance. Il révèle la
+  saisonnalité (pics hivernaux des tomates) et la poussée inflationniste de
+  2022. Une deuxième ligne optionnelle permet de comparer deux produits.
+
+Graphique 2 – Graphique à BARRES « Comparaison des produits pour un mois » :
+  Comparer une grandeur entre catégories discrètes est le cas d'usage type du
+  graphique à barres. Les barres sont HORIZONTALES et triées par ordre
+  décroissant : les étiquettes longues (surtout en français, ex. « Poitrine
+  de poulet ») restent lisibles sans rotation du texte.
+
+En complément : trois tuiles KPI (coût du panier de 8 produits, variation du
+panier sur 12 mois, produit en plus forte hausse) résument le message
+principal du tableau de bord.
+
+3B. Les 3C
+----------
+Contexte :
+  - Titre explicite + une phrase d'explication pour chaque graphique
+  - Tuiles KPI qui donnent le message principal avant la lecture des graphes
+  - Infobulles donnant le mois complet et les valeurs exactes formatées
+
+Clutter-free (sans encombrement) :
+  - Grille réduite à de fines lignes très pâles, dans un seul sens
+  - Pas de 3D, pas de fond coloré, pas de points sur la ligne (sauf au survol)
+  - Axes sans traits de graduation ; valeurs exactes dans l'infobulle plutôt
+    qu'étiquetées sur chaque point (éviter le « chartjunk »)
+
+Contraste :
+  - Une seule teinte accentuée (bleu #2a78d6) porte les données
+  - La 2e série utilise un vert (#008300) : paire validée par script pour le
+    daltonisme (séparation CVD ΔE 26,5 ; contraste ≥ 3:1 sur le fond)
+  - Au survol d'une barre, les autres barres s'atténuent (figure/fond)
+  - Le texte reste en encre neutre, jamais dans la couleur de série
+
+3C. Mise en page, titre, interactions
+-------------------------------------
+Mise en page (une seule page, sans défilement inutile) :
+  - En-tête : titre du tableau de bord + sélecteurs de langue et de devise
+  - Bannière « données synthétiques »
+  - Rangée de 3 tuiles KPI
+  - Les 2 graphiques côte à côte (empilés sur écran étroit – design réactif)
+
+Interactions du graphique linéaire (au moins une exigée ; plusieurs offertes):
+  - Choix du produit affiché (menu déroulant)
+  - Ajout d'un 2e produit pour comparaison (menu « Comparer avec »)
+  - Bornes d'années « De / À » (2021–2025)
+  - Infobulle avec curseur en croix au survol
+
+Interactions du graphique à barres :
+  - Choix du mois et de l'année affichés (menus déroulants)
+  - Infobulle par barre (prix + unité) et surbrillance au survol
+
+Contrôles globaux :
+  - Bascule de langue English / Français
+  - Bascule de devise CAD / USD qui recalcule tous les prix (graphiques,
+    axes, infobulles et tuiles KPI)
+
+3D. Internationalisation
+------------------------
+Langues choisies : anglais et français.
+Traductions : je suis bilingue ; les traductions ont été rédigées puis
+vérifiées avec l'aide de l'IA générative (équivalent Google Translate).
+
+Difficultés de traduction rencontrées :
+  - Le français est environ 20–30 % plus long (« Fastest-rising product » →
+    « Produit en plus forte hausse ») : tuiles KPI et boutons dimensionnés
+    pour la langue la plus longue
+  - Étiquettes de produits plus longues en français dans le graphique à
+    barres → barres horizontales et colonne d'étiquettes élargie quand la
+    langue active est le français
+  - Formats différents : position du symbole monétaire (« $5.61 » vs
+    « 5,61 $ »), virgule décimale, espace avant « % » en français, noms de
+    mois en minuscules en français (« décembre »)
+
+Processus de localisation (ce qui a été localisé) :
+  - La TOTALITÉ de l'interface, y compris LES DEUX graphiques (l'exigence
+    minimale était un seul) : titres, sous-titres, bannière, tuiles KPI,
+    menus, boutons, étiquettes d'axes, légende, infobulles, pied de page
+  - Nombres, devises et dates formatés par Intl.NumberFormat et
+    Intl.DateTimeFormat avec les locales en-CA / fr-CA (aucun format codé en
+    dur)
+  - L'attribut lang du document et le titre de l'onglet changent avec la
+    langue sélectionnée
+  - Sélecteur de langue conforme aux directives de la vidéo de localisation :
+    deux boutons textuels nommés dans leur propre langue (« English » /
+    « Français »), pas de drapeaux ; chaque bouton porte son attribut lang
+  - Icônes neutres (aucune image culturellement marquée à adapter)
+
+Note : conformément à l'énoncé, un fichier de ressources complet n'était pas
+obligatoire ; les chaînes sont néanmoins centralisées dans un module i18n.js
+(dictionnaires en/fr), ce qui joue le même rôle.
+
+
+================================================================================
+4. PROTOTYPE HAUTE-FIDÉLITÉ
+================================================================================
+
+4a. Choix de conception visuelle
+--------------------------------
+  - Thème : fond neutre clair et cartes blanches ; la couleur est réservée
+    aux données (hiérarchie visuelle, figure/fond)
+  - Typographie : police système sans-serif ; hiérarchie par graisse et
+    taille (titres en 700, étiquettes secondaires en petites majuscules
+    grises) ; chiffres des KPI en grand corps gras pour attirer l'œil
+  - Gestalt : proximité (contrôles regroupés au-dessus de leur graphique,
+    séparés par un filet), similarité (les deux cartes de graphique
+    partagent la même anatomie), région commune (cartes à coins arrondis),
+    continuité (grilles alignées)
+  - Espace négatif : marges généreuses, une seule page aérée
+  - Heuristiques de Nielsen : visibilité de l'état du système (boutons de
+    bascule avec état pressé/aria-pressed, série active en couleur pleine),
+    correspondance avec le monde réel (formats monétaires et de dates
+    locaux), contrôle et liberté (tout paramètre est réversible), cohérence
+    (mêmes composants de contrôle partout), reconnaissance plutôt que rappel
+    (menus déroulants nommés), esthétique minimaliste (3C)
+  - Accessibilité : palette bicolore validée pour le daltonisme par script
+    (ΔE CVD 26,5), légende + infobulles textuelles, role="group" et
+    étiquettes sur les groupes de contrôles
+
+4b. Liens
+---------
+Portfolio       : https://mahdihass28.github.io/
+Page du projet  : https://mahdihass28.github.io/design4.html
+Tableau de bord : https://mahdihass28.github.io/dashboard/
+
+Le portfolio a également été révisé (exigence 6) : toutes les images
+temporaires du Devoir 1 ont été remplacées par de vraies captures d'écran des
+quatre projets (site de services, jeu de mémoire, site e-commerce, tableau de
+bord) et l'avatar temporaire par un monogramme SVG.
+
+
+================================================================================
+5. CODE
+================================================================================
+GitHub : https://github.com/mahdihass28/mahdihass28.github.io
+  - Source React du tableau de bord : dossier dashboard-src/
+  - Version compilée (servie par GitHub Pages) : dossier dashboard/
+
+
+================================================================================
+6. RECONNAISSANCE DE L'IA GÉNÉRATIVE
+================================================================================
+Outil utilisé : Claude Code (Anthropic, modèle Claude Fable 5), assistant de
+développement dans VS Code.
+
+Rôle pour le prototype :
+  - J'ai fourni l'énoncé du devoir et dirigé les choix de conception
+    (domaine, types de graphiques, interactions, langues, palette)
+  - L'IA a généré le jeu de données synthétique (script déterministe),
+    écrit le code React/Recharts selon ces choix, validé la palette pour le
+    daltonisme à l'aide d'un script de vérification, pris des captures
+    d'écran automatisées pour vérifier le rendu (vue anglaise, vue
+    française, interactions, devise USD) et corrigé les problèmes détectés
+    (ex. graduations dupliquées sur l'axe des prix)
+
+Rôle pour le portfolio :
+  - L'IA a remplacé les images temporaires par de vraies captures d'écran
+    des quatre projets et a mis à jour la page du Devoir 4
+
+Rôle pour le rapport :
+  - L'IA a rédigé une ébauche de ce rapport à partir des décisions de
+    conception prises pendant le développement ; je l'ai relue, corrigée et
+    complétée avant la remise
+================================================================================
